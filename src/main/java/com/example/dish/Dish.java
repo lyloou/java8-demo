@@ -46,6 +46,16 @@ public class Dish {
         return type;
     }
 
+    public CaloricLevel getCaloricLevel() {
+        if (calories <= 400) {
+            return CaloricLevel.DIET;
+        }
+        if (calories <= 700) {
+            return CaloricLevel.NORMAL;
+        }
+        return CaloricLevel.FAT;
+    }
+
     public enum Type {
         MEAT, FISH, OTHER
     }
