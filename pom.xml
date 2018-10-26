@@ -31,6 +31,12 @@
             <!--<artifactId>slf4j-log4j12</artifactId>-->
             <!--<version>${org.slf4j.version}</version>-->
         <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>23.0</version>
+        </dependency>
     </dependencies>
 
     <build>
