@@ -2,20 +2,33 @@ package com.example.effectivejava.common.reflect;
 
 import org.junit.Test;
 import org.reflections.Reflections;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.MethodParameterScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Set;
 
 public class ReflectionTest {
     @Test
     public void test2() throws IllegalAccessException, InstantiationException {
-        Reflections reflections = new Reflections("com.example.effectivejava.common.reflect");
+        String package1 = "com.example.effectivejava.common.reflect";
+        ConfigurationBuilder configuration = new ConfigurationBuilder()
+                .setUrls(ClasspathHelper.forPackage(package1))
+                .setScanners(new SubTypesScanner(), new MethodParameterScanner(), new MethodAnnotationsScanner(), new TypeAnnotationsScanner());
+        Reflections reflections = new Reflections(configuration);
 
         Set<Class<? extends Parent>> set = reflections.getSubTypesOf(Parent.class);
         System.out.println(set);
         for (Class<? extends Parent> aClass : set) {
             Parent parent = aClass.newInstance();
             System.out.println(parent.name());
+            Set<Method> methodsReturn = reflections.getMethodsAnnotatedWith(Override.class);
+            System.out.println(methodsReturn);
         }
 
         Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(AnnotationCommon.class);
