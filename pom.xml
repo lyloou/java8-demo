@@ -15,6 +15,7 @@
         <module>demo</module>
         <module>algs4</module>
         <module>nio-demo</module>
+        <module>frame</module>
     </modules>
 
 </project>
