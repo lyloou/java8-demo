@@ -1,6 +1,5 @@
 package com.example.algs.practice;
 
-import edu.princeton.cs.algs4.StdOut;
 
 public class C1 {
     public static void main(String[] args) {
@@ -100,7 +99,7 @@ public class C1 {
     }
 
     public static void q111() {
-        StdOut.println(Math.abs(-2147483648f));
+        System.out.println(Math.abs(-2147483648f));
         System.out.println(15 / 2);
         System.out.println(2.0e-6 * 100000000.1);
         System.out.println(true && false || true && true);
