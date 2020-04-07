@@ -1,5 +1,7 @@
 package com.example.concurrent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
@@ -32,5 +34,28 @@ public class CyclicBarrierDemo {
             }).start();
         }
 
+    }
+
+    static void runOneTime2() {
+        List<String> list = new ArrayList<>();
+
+        int parties = 10;
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(parties, () -> {
+            System.out.println("all done");
+            System.out.println(list);
+        });
+
+        for (int i = 0; i < parties; i++) {
+            final int r = i;
+            new Thread(() -> {
+                System.out.println("do:i" + r);
+                list.add(Thread.currentThread().getName() + "," + r);
+                try {
+                    cyclicBarrier.await();
+                } catch (InterruptedException | BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
+            }, "i:" + i).start();
+        }
     }
 }

@@ -18,6 +18,38 @@ public class CountDownLatchDemo {
     public static final int SIZE = 5;
 
     public static void main(String[] args) throws InterruptedException {
+        //countDownThread();
+        // runOneTime();
+        CyclicBarrierDemo.runOneTime2();
+    }
+
+
+    // 可以通过 Barrier 同样实现
+    private static void runOneTime() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> {
+                try {
+                    long l = (long) (1000 * Math.random());
+                    Thread.sleep(l);
+                    System.out.println(Thread.currentThread().getName() + "|睡眠随机一个时间：" + l);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + "|同时执行：" + System.currentTimeMillis());
+            }, "i:" + i).start();
+        }
+        Thread.sleep(1000);
+        latch.countDown();
+        System.out.println("结束");
+    }
+
+    private static void countDownThread() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(SIZE);
         for (int i = 0; i < SIZE; i++) {
             new Thread(() -> run(latch)).start();
