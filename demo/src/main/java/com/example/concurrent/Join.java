@@ -10,7 +10,6 @@ public class Join {
             thread.start();
             previous = thread;
         }
-        TimeUnit.SECONDS.sleep(5);
         System.out.println(Thread.currentThread().getName() + " terminate.");
     }
 
@@ -24,8 +23,10 @@ public class Join {
         public void run() {
             try {
                 thread.join();
+                TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
             }
+            // thread 线程结束后，才会走到这里来
             System.out.println(Thread.currentThread().getName() + " terminate.");
         }
     }
