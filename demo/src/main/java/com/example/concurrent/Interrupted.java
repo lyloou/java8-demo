@@ -1,5 +1,7 @@
 package com.example.concurrent;
 
+import com.example.util.Usleep;
+
 import java.util.concurrent.TimeUnit;
 
 public class Interrupted {
@@ -18,14 +20,14 @@ public class Interrupted {
         busyThread.resume();
         System.out.println("SleepThread interrupted is " + sleepThread.isInterrupted());
         System.out.println("BusyThread interrupted is " + busyThread.isInterrupted()); // 防止sleepThread和busyThread立刻退出
-        SleepUtils.second(2);
+        Usleep.second(2);
     }
 
     static class SleepRunner implements Runnable {
         @Override
         public void run() {
             while (true) {
-                SleepUtils.second(10);
+                Usleep.second(10);
             }
         }
     }

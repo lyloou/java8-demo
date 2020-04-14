@@ -49,7 +49,6 @@ public class SimpleWebServer {
             try {
                 reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 String header = reader.readLine();
-                System.out.println(header);
                 String filePath = basePath + header.split(" ")[1];
                 System.out.println("path:" + filePath);
                 out = new PrintWriter(socket.getOutputStream());

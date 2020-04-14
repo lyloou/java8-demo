@@ -1,6 +1,6 @@
 package com.example.concurrent;
 
-import java.util.concurrent.TimeUnit;
+import com.example.util.Usleep;
 
 public class ThreadState {
 
@@ -16,7 +16,7 @@ public class ThreadState {
         @Override
         public void run() {
             while (true) {
-                SleepUtils.second(100);
+                Usleep.second(100);
             }
         }
     }
@@ -42,7 +42,7 @@ public class ThreadState {
         public void run() {
             synchronized (Blocked.class) {
                 while (true) {
-                    SleepUtils.second(100);
+                    Usleep.second(100);
                 }
             }
         }
@@ -51,12 +51,3 @@ public class ThreadState {
 
 }
 
-class SleepUtils {
-    public static void second(int i) {
-        try {
-            TimeUnit.SECONDS.sleep(i);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}

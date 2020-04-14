@@ -1,5 +1,7 @@
 package com.example.concurrent;
 
+import com.example.util.Usleep;
+
 public class Daemon {
     public static void main(String[] args) {
         Thread thread = new Thread(new DaemonRunner(), "DaemonRunner");
@@ -7,7 +9,7 @@ public class Daemon {
         thread.setDaemon(true);
         thread.start();
         System.out.println("bbb");
-        SleepUtils.second(23);
+        Usleep.second(23);
     }
 
     static class DaemonRunner implements Runnable {
@@ -15,7 +17,7 @@ public class Daemon {
         public void run() {
             try {
                 System.out.println("ccc");
-                SleepUtils.second(10);
+                Usleep.second(10);
                 System.out.println("ddd");
             } finally {
                 System.out.println("DaemonThread finally run.");

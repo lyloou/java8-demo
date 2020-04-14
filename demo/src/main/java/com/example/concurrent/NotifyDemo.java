@@ -1,5 +1,7 @@
 package com.example.concurrent;
 
+import com.example.util.Usleep;
+
 public class NotifyDemo {
     private static final Object lock = new Object();
 
@@ -25,7 +27,7 @@ public class NotifyDemo {
         new Thread(() -> {
             // b线程会占用 3s
             synchronized (lock) {
-                SleepUtils.second(3);
+                Usleep.second(3);
             }
         }, "b").start();
     }
@@ -45,7 +47,7 @@ public class NotifyDemo {
         }, "a").start();
         new Thread(() -> {
             synchronized (lock) {
-                SleepUtils.second(3);
+                Usleep.second(3);
                 lock.notify();
             }
         }, "b").start();

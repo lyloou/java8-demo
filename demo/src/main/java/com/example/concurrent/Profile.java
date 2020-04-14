@@ -1,5 +1,7 @@
 package com.example.concurrent;
 
+import com.example.util.Usleep;
+
 public class Profile {
     private static final ThreadLocal<Long> TIME_THREAD_LOCAL = new ThreadLocal<>();
 
@@ -15,7 +17,7 @@ public class Profile {
         System.out.println(Profile.TIME_THREAD_LOCAL.get());
         Profile.begin();
         System.out.println(Profile.TIME_THREAD_LOCAL.get());
-        SleepUtils.second(1);
+        Usleep.second(1);
         System.out.println(Profile.end());
     }
 }
