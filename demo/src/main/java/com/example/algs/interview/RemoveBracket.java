@@ -15,14 +15,15 @@ package com.example.algs.interview;
  */
 public class RemoveBracket {
     public static void main(String[] args) {
-        String s = "{{[}]}";
+        String s = "{{[]}}()";
         s = handleStr(s);
         System.out.println(s);
         System.out.println(s.length() == 0);
     }
 
     private static String handleStr(String s) {
-        for (int i = 0; i < s.length(); i++) {
+        int length = s.length();
+        for (int i = 0; i < length && !s.isEmpty(); i++) {
             s = s.replaceAll("\\{\\}", "");
             s = s.replaceAll("\\(\\)", "");
             s = s.replaceAll("\\[\\]", "");
